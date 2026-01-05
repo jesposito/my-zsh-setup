@@ -1,54 +1,59 @@
-# Modern Zsh Setup
+# My Zsh Setup
 
 [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/jesposito/my-zsh-setup)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Shell](https://img.shields.io/badge/shell-bash-orange.svg)](https://www.gnu.org/software/bash/)
 
-A robust, idempotent, cross-platform zsh configuration installer that sets up a beautiful and functional terminal environment.
+A zsh configuration installer that attempts to set up a nice terminal environment across different platforms. Originally created for my own use, but might be helpful for others.
 
-## ✨ Features
+> **⚠️ Note**: This is a relatively new rewrite (v2.0.0) and needs more real-world testing across different environments. If you encounter issues, please [open an issue](https://github.com/jesposito/my-zsh-setup/issues) or contribute a fix!
 
-### 🔄 **Robust & Idempotent**
-- Safe to run multiple times
-- Automatic backup of existing configurations
-- Comprehensive error handling and validation
-- Dry-run mode to preview changes
+## ✨ What It Does
 
-### 🌍 **Cross-Platform**
+### 🔄 **Tries to be Safe**
+- Attempts to run multiple times without breaking things (idempotent)
+- Backs up existing configurations automatically
+- Includes error handling and validation
+- Dry-run mode to see what would happen
+
+### 🌍 **Cross-Platform Goals**
 - **macOS** (with Homebrew)
 - **Linux** (Ubuntu/Debian, Fedora, Arch)
-- **WSL1/WSL2** with automatic Windows integration detection
+- **WSL1/WSL2** with Windows integration attempts
 
-### 🎨 **Complete Setup**
-- **[Zsh](https://www.zsh.org/)** - Modern shell with powerful features
-- **[Oh My Zsh](https://ohmyz.sh/)** - Framework for managing zsh configuration
-- **[Powerlevel10k](https://github.com/romkatv/powerlevel10k)** - Beautiful, fast prompt theme
+*Note: Primarily tested on WSL/Ubuntu. Other platforms need more testing.*
+
+### 🎨 **What Gets Installed**
+- **[Zsh](https://www.zsh.org/)** - Shell with nice features
+- **[Oh My Zsh](https://ohmyz.sh/)** - Framework for managing zsh
+- **[Powerlevel10k](https://github.com/romkatv/powerlevel10k)** - Fast, customizable prompt theme
 - **Plugins**:
   - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
   - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - **[Nerd Fonts](https://www.nerdfonts.com/)** - MesloLGS NF for icons
 - **Optional**: Kubernetes tools (kubectl, helm, kubectx, kubens)
 
-### ⚙️ **Highly Customizable**
+### ⚙️ **Customization Options**
 - Command-line flags for selective installation
 - Environment variables for configuration
 - Non-interactive mode for automation
-- Configurable via dotfiles
 
 ## 🚀 Quick Start
 
-### One-Line Install
+> **⚠️ Recommended**: Run with `--dry-run` first to see what it will do!
+
+### Preview First (Recommended)
 
 ```bash
 git clone https://github.com/jesposito/my-zsh-setup.git
 cd my-zsh-setup
-./setup.sh
+./setup.sh --dry-run
 ```
 
-### Dry Run (Preview Changes)
+### Standard Install
 
 ```bash
-./setup.sh --dry-run
+./setup.sh
 ```
 
 ### Non-Interactive Install
@@ -341,17 +346,32 @@ sudo dnf install ShellCheck bats
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+**Contributions are very welcome!** This script needs more testing across different environments and setups. If you:
 
-### Development Setup
+- Find a bug → [Open an issue](https://github.com/jesposito/my-zsh-setup/issues)
+- Have a platform it doesn't work on → Please help test/fix it
+- Want to add a feature → Pull requests appreciated
+- Have improvement ideas → Let's discuss them
+
+### How to Contribute
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+2. Create your feature branch (`git checkout -b feature/your-feature`)
 3. Make your changes
-4. Run tests (`./tests/run_tests.sh`)
-5. Commit your changes (`git commit -m 'Add amazing feature'`)
-6. Push to the branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
+4. Test thoroughly (especially `./setup.sh --dry-run`)
+5. Run tests if possible (`./tests/run_tests.sh`)
+6. Commit your changes
+7. Push to the branch and open a Pull Request
+
+### Testing Help Needed
+
+Especially looking for testing on:
+- **macOS** (Intel and Apple Silicon)
+- **Fedora/RHEL** (dnf package manager)
+- **Arch Linux** (pacman package manager)
+- **Different WSL versions and configurations**
+
+Even just trying it out and reporting success/failure helps!
 
 ## 📝 Configuration Files
 
@@ -363,6 +383,16 @@ After installation, you'll have:
 - `~/.zsh-setup-backups/` - Backup directory
 
 ## 🐛 Troubleshooting
+
+### Something Broke?
+
+First, check your backups:
+
+```bash
+ls -la ~/.zsh-setup-backups/
+# Restore if needed:
+cp ~/.zsh-setup-backups/YYYYMMDD-HHMMSS/.zshrc ~/.zshrc
+```
 
 ### Zsh Not Default Shell
 
@@ -402,35 +432,48 @@ Make sure the script is executable:
 chmod +x setup.sh
 ```
 
-## 🔒 Security
+### Still Having Issues?
 
-- All downloads are from official sources
-- Uses HTTPS for all remote operations
+Please [open an issue](https://github.com/jesposito/my-zsh-setup/issues) with:
+- Your OS and version
+- Error messages
+- Output from `./setup.sh --verbose --dry-run`
+
+## 🔒 Security Notes
+
+- Downloads are from official sources (Oh My Zsh, Powerlevel10k, etc.)
+- Uses HTTPS for remote operations
 - No credentials or sensitive data stored
-- Safe to run with `--dry-run` first
+- **Always review scripts before running them!**
+- Use `--dry-run` first to see what it will do
+
+If you spot any security issues, please [report them](https://github.com/jesposito/my-zsh-setup/issues).
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## 🙏 Credits
 
+This builds on the excellent work of:
 - [Oh My Zsh](https://ohmyz.sh/) - Zsh framework
-- [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Prompt theme
+- [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Prompt theme by romkatv
 - [zsh-users](https://github.com/zsh-users) - Plugin authors
 - [Nerd Fonts](https://www.nerdfonts.com/) - Font developers
 
-## 🌟 Star History
-
-If you find this useful, please consider giving it a star! ⭐
-
-## 📞 Support
+## 📞 Getting Help
 
 - **Issues**: [GitHub Issues](https://github.com/jesposito/my-zsh-setup/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/jesposito/my-zsh-setup/discussions)
 
+## 💭 About
+
+Originally created for my own use to quickly set up zsh on new machines. The v2.0.0 rewrite aimed to make it more portable and useful for others, but it still needs more testing across different environments.
+
+If this helps you, great! If you find issues or have improvements, please contribute back.
+
 ---
 
-**Made with ❤️ by [jesposito](https://github.com/jesposito)**
+**Made by [jesposito](https://github.com/jesposito)**
 
-**Enhanced with 🤖 by [Claude Code](https://claude.com/claude-code)**
+**v2.0.0 rewrite with 🤖 [Claude Code](https://claude.com/claude-code)**

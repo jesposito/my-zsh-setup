@@ -475,5 +475,3 @@ If this helps you, great! If you find issues or have improvements, please contri
 ---
 
 **Made by [jesposito](https://github.com/jesposito)**
-
-**v2.0.0 rewrite with 🤖 [Claude Code](https://claude.com/claude-code)**
